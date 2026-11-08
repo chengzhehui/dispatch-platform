@@ -1,0 +1,30 @@
+{
+  "name": "welder-dispatch-platform",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --test scripts/domain.test.mjs scripts/move-effects.test.mjs scripts/worker-controller.test.mjs scripts/ep3d-welding.test.mjs scripts/history.test.mjs scripts/run-python.test.mjs",
+    "check:models": "node scripts/check-models.mjs",
+    "test:history-import": "node scripts/run-python.mjs scripts/test_diesel_import.py",
+    "import:diesel-history": "node scripts/run-python.mjs scripts/import_diesel_history.py",
+    "import:ep3d": "node scripts/run-python.mjs scripts/import_ep3d_data.py"
+  },
+  "dependencies": {
+    "3d-tiles-renderer": "0.4.24",
+    "camera-controls": "3.1.2",
+    "three": "0.183.2",
+    "vue": "3.5.30"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "6.0.5",
+    "playwright": "1.59.1",
+    "vite": "8.0.1"
+  },
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=23.5.0"
+  }
+}

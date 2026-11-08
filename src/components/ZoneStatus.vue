@@ -1,0 +1,8 @@
+<script setup>
+import { computed, ref } from 'vue'
+const props = defineProps({ zones: Array, totals: Object, unit: String, layer: Number, readOnly: Boolean })
+defineEmits(['focus', 'close'])
+const occupiedOnly = ref(false)
+const visible = computed(() => props.zones.filter(z => !occupiedOnly.value || z.count > 0))
+</script>
+<template><section class="zone-status" aria-label="工区人员统计"><div class="zone-heading"><h2>工区人员统计 <span>{{ unit === 'ALL' ? '全项目' : `${unit} 单元` }} · {{ zones.length }} 个立方体工区</span></h2><button class="text-button" aria-label="关闭工区统计" @click="$emit('close')">收起</button></div><label class="occupied-filter"><input v-model="occupiedOnly" type="checkbox">只看有人工区</label><div class="zone-status-content"><div class="zone-scroll"><button v-for="zone in visible" :key="zone.id" class="zone-cell" :class="{ occupied: zone.count > 0, 'current-layer': zone.layer === layer }" :aria-label="`${zone.id} 工区 ${zone.count} 人，定位工区`" @click="$emit('focus', zone)"><span>{{ zone.id }}</span><strong>{{ zone.count }}<small> 人</small></strong></button><p v-if="!visible.length" class="muted">暂无有人工区</p></div><div class="total-stats"><div class="welding-stat"><span>焊接中</span><strong>{{ totals.welding || 0 }}<small> 人</small></strong></div><div><span>总人数</span><strong>{{ totals.total }}<small> 人</small></strong></div><div><span>{{ readOnly ? '未定位 / 区外' : '预备区 / 区外' }}</span><strong>{{ totals.reserve }}<small> 人</small></strong></div><div><span>移动中</span><strong>{{ totals.moving }}<small> 人</small></strong></div><div><span>工区内</span><strong>{{ totals.assigned }}<small> 人</small></strong></div></div></div></section></template>

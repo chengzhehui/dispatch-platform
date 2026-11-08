@@ -1,0 +1,24 @@
+node_modules/
+dist/
+artifacts/
+*.log
+.venv/
+__pycache__/
+*.pyc
+
+# Project models and generated construction data are distributed separately,
+# following three-demo's large-asset policy. Keep the small CC0 worker model.
+public/models/uae/
+public/models/diesel-4d/
+public/data/
+server-data/
+
+# Local configuration and editor files
+.env
+.env.*
+!.env.example
+*.local
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
